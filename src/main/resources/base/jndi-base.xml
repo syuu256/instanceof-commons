@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+  xmlns:r="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-4.0.xsd
+   ">
+
+  <bean id="jndi" class="org.apache.xbean.spring.jndi.SpringInitialContextFactory" factory-method="makeInitialContext">
+    <property name="entries">
+      <map>
+        <entry key="java:/comp/env/jdbc/dataSource">
+          <ref bean="dataSource"/>
+        </entry>
+      </map>
+    </property>
+  </bean>
+
+  <bean id="dataSource" class="net._instanceof.commons.datasource.SQLDelegatingDataSource">
+    <property name="targetDataSource" ref="basicDataSource"/>
+  </bean>
+
+  <bean id="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+     <property name="url"      ref="url"/>
+     <property name="username" ref="username"/>
+     <property name="password" ref="password"/>
+     <property name="driverClassName"                ><value>com.mysql.jdbc.Driver</value></property>
+     <property name="initialSize"                    ><value>8</value></property>
+     <property name="maxActive"                      ><value>12</value></property>
+     <property name="maxIdle"                        ><value>8</value></property>
+     <property name="maxWait"                        ><value>-1</value></property>
+     <property name="defaultAutoCommit"              ><value>true</value></property>
+     <property name="defaultReadOnly"                ><value>false</value></property>
+     <property name="validationQuery"                ><value>SELECT 1</value></property>
+     <property name="timeBetweenEvictionRunsMillis"  ><value>180000</value></property>
+     <property name="minIdle"                        ><value>5</value></property>
+     <property name="testWhileIdle"                  ><value>true</value></property>
+     <property name="minEvictableIdleTimeMillis"     ><value>3600000</value></property>
+     <property name="numTestsPerEvictionRun"         ><value>5</value></property>
+  </bean>
+
+</beans>
