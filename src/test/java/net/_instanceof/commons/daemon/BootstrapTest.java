@@ -34,7 +34,7 @@ public class BootstrapTest {
 		System.setProperty("net._instanceof.commons.util.spring.xml", "junit_applicationContext.xml");
 		System.setProperty("net._instanceof.commons.daemon.Bootstrap.main", "BootableMock");
 		
-		Bootstrap.main(null);
+		new Bootstrap().boot();
 		
 		
 	}

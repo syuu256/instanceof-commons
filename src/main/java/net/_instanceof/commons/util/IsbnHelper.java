@@ -1,7 +1,7 @@
 /*
  * Copyright(C) 2014 syuu256\gmail.com. All Rights Reserved.
  */
-package net._instanceof.commons.util.util;
+package net._instanceof.commons.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

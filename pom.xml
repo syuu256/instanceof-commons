@@ -14,6 +14,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.version>4.0.3.RELEASE</spring.version>
     <java.jdk.code.version>1.8</java.jdk.code.version>
+    <!-- github server corresponds to entry in ~/.m2/settings.xml -->
+    <github.global.server>github</github.global.server>
   </properties>
 
   <dependencies>
@@ -137,37 +139,6 @@
       <scope>runtime</scope>
     </dependency>
 
-    <!-- ========== exclusion ========== -->
-
-<!--
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>99.0-does-not-exist</version>
-      <scope>compile</scope>
-    </dependency>
--->
-
-    <exclusions>
-      <exclusion>
-        <artifactId>commons-logging</artifactId>
-        <groupId>commons-logging</groupId>
-      </exclusion>
-    </exclusions>
-
-    <exclusions>
-      <exclusion>
-        <artifactId>log4j</artifactId>
-        <groupId>log4j</groupId>
-      </exclusion>
-    </exclusions>
-
-    <exclusions>
-      <exclusion>
-        <artifactId>slf4j-jdk14</artifactId>
-        <groupId>org.slf4j</groupId>
-      </exclusion>
-    </exclusions>
 
   </dependencies>
 
@@ -181,6 +152,14 @@
     </repository>
 
   </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>internal.repo</id>
+      <name>Temporary Staging Repository</name>
+      <url>file://${project.build.directory}/mvn-repo</url>
+    </repository>
+  </distributionManagement>
 
   <build>
     <resources>
@@ -233,6 +212,50 @@
           <executable>java</executable>
           <mainClass></mainClass>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.8</version>
+        <configuration>
+          <!-- jarファイルをディプロイする時のコミットメッセージ -->
+          <message>Maven artifacts for ${project.version}</message>
+          <!-- Jekyllという静的ページを生成するツールは無効 -->
+          <noJekyll>true</noJekyll>
+          <!-- 1.で指定したパスと同じものを指定 -->
+          <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+          <!-- Mavenリポジトリにするリモートのブランチ名 -->
+          <branch>refs/heads/mvn-repo</branch>
+          <includes><include>**/*</include><!-- */ --></includes>
+          <!-- GitHubリポジトリ名 -->
+          <repositoryName>YOUR-REPOSITORY-NAME</repositoryName>
+          <!-- GitHubユーザ名  -->
+          <repositoryOwner>YOUR-GITHUB-USERNAME</repositoryOwner>
+        </configuration>
+        <executions>
+          <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
+          <execution>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <phase>deploy</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
       </plugin>
 
     </plugins>

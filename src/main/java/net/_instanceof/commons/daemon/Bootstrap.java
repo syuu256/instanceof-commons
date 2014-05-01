@@ -3,8 +3,8 @@
  */
 package net._instanceof.commons.daemon;
 
+import static net._instanceof.commons.util.ResourcesUtil.getSystemValue;
 import net._instanceof.commons.util.spring.ApplicationContextBuilder;
-import static net._instanceof.commons.util.util.ResourcesUtil.getSystemValue;
 
 /**
  * -Dcom.sun.management.jmxremote.authenticate=false 
@@ -17,7 +17,7 @@ public final class Bootstrap {
     public static void main(final String[] args) {
         System.exit(new Bootstrap().boot());
     }
-    private int boot() {
+    protected int boot() {
         return new ApplicationContextBuilder()
             .createContext()
             .bindJNDI()

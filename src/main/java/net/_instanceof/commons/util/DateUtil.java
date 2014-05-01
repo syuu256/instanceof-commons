@@ -1,7 +1,7 @@
 /*
  * Copyright(C) 2014 syuu256\gmail.com. All Rights Reserved.
  */
-package net._instanceof.commons.util.util;
+package net._instanceof.commons.util;
 
 import java.text.DateFormat;
 import java.text.ParseException;
