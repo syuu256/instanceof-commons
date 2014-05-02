@@ -16,3 +16,28 @@ instanceof-commons
 package名に予約語が有るので↓で対応
 
 If any of the resulting package name components are keywords (§3.9) then append underscore to them.
+
+maven等
+------
+
+repository
+-----------
+    <repository>
+      <id>instanceof-commons-github</id>
+      <url>https://raw.github.com/syuu256/instanceof-commons/mvn-repo/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+
+dependency
+-----------
+    <dependency>
+      <groupId>net._instanceof</groupId>
+      <artifactId>instanceof-commons</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+
+
