@@ -3,14 +3,21 @@
  */
 package net._instanceof.commons.datasource;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.collect.Maps;
 
 public class DBUtil {
+
+    private static Logger log = LoggerFactory.getLogger(DBUtil.class);
 
     /**
      * ResultSet2Map
@@ -30,4 +37,29 @@ public class DBUtil {
         return m;
     }
 
+	public static void executeStatement(final Connection connection, final String sql, final String ... parameter) {
+
+		try (final PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
+			for (int i = 0; i < parameter.length; i++)
+				preparedStatement.setString(i + 1, parameter[i]);
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			if (log.isErrorEnabled()) {
+				log.error("sql:" + sql, e);
+			}
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static void commit(final Connection connection) {
+		
+		try {
+			connection.commit();
+		} catch (SQLException e) {
+			if (log.isErrorEnabled()) {
+				log.error("commit error:", e);
+			}
+			throw new RuntimeException(e);
+		}
+	}
 }

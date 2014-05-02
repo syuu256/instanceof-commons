@@ -46,10 +46,24 @@ public class ResourcesUtil {
         return r;
     }
 
+    public static String getSystemValue(final String key, final String def) {
+        final String value = System.getProperty(key, def);
+        // non equals
+        if (value == def) {
+            final String msg = "unset system parameter [-D" + key + "={$foo}]";
+            if (log.isWarnEnabled()) {
+                log.warn(msg);
+            }
+        }
+        if (log.isInfoEnabled()) {
+            log.info("-D" + key + "=" + value);
+        }
+        return value;
+    }
     public static String getSystemValue(final String key) {
         final String value = System.getProperty(key);
         if (value == null) {
-            final String msg = "unset target date -D" + key + "";
+            final String msg = "unset system parameter [-D" + key + "={$foo}]";
             if (log.isErrorEnabled()) {
                 log.error(msg);
             }

@@ -23,13 +23,16 @@
    ">
 
   <bean id="url" scope="singleton" class="java.lang.String">
-      <constructor-arg><value>jdbc:mysql://127.0.0.1:33306/mysql_db?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</value></constructor-arg>
+      <constructor-arg><value>jdbc:mysql://127.0.0.1:3306/mysql_db?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</value></constructor-arg>
   </bean>
   <bean id="username" scope="singleton" class="java.lang.String">
       <constructor-arg><value>user</value></constructor-arg>
   </bean>
   <bean id="password" scope="singleton" class="java.lang.String">
-      <constructor-arg><value><![CDATA[pass!##]]></value></constructor-arg>
+      <constructor-arg><value><![CDATA[pass&##]]></value></constructor-arg>
+  </bean>
+  <bean id="driverClassName" scope="singleton" class="java.lang.String">
+      <constructor-arg><value>com.mysql.jdbc.Driver</value></constructor-arg>
   </bean>
 
   <import resource="classpath:base/jndi-base.xml"/>

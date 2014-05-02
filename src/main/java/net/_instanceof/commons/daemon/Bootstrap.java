@@ -22,7 +22,7 @@ public final class Bootstrap {
             .createContext()
             .bindJNDI()
             .getApplicationContext()
-            .getBean(getSystemValue(Bootstrap.class.getPackage().getName() + ".Bootstrap.main"), Bootable.class)
+            .getBean(getSystemValue(Bootstrap.class.getPackage().getName() + ".Bootstrap.main.beanid"), Bootable.class)
             .start();
     }
 }

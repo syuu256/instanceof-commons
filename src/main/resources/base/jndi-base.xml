@@ -40,7 +40,7 @@
      <property name="url"      ref="url"/>
      <property name="username" ref="username"/>
      <property name="password" ref="password"/>
-     <property name="driverClassName"                ><value>com.mysql.jdbc.Driver</value></property>
+     <property name="driverClassName" ref="driverClassName"/>
      <property name="initialSize"                    ><value>8</value></property>
      <property name="maxActive"                      ><value>12</value></property>
      <property name="maxIdle"                        ><value>8</value></property>
