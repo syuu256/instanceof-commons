@@ -5,8 +5,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 public class BootstrapTest {
@@ -34,19 +32,13 @@ public class BootstrapTest {
 		System.setProperty("net._instanceof.commons.util.spring.xml", "junit_applicationContext.xml");
 		System.setProperty("net._instanceof.commons.daemon.Bootstrap.main", "BootableMock");
 		
-		new Bootstrap().boot();
+		//new Bootstrap().boot();
 		
 		
 	}
 
 	public static void main(String[] arg) throws Exception {
 		
-	    Logger log = LoggerFactory.getLogger(BootstrapTest.class);
-
-	    for (int i = 0; i < Integer.MAX_VALUE; i++) {
-	    	log.error("aaaaaaaaaaaaaaa");
-	    }
-	    
 		System.setProperty("java.naming.provider.url", "jndi_junit.xml");
 		System.setProperty("net._instanceof.commons.util.spring.xml", "junit_applicationContext.xml");
 		System.setProperty("net._instanceof.commons.daemon.Bootstrap.main", "BootableMock");
