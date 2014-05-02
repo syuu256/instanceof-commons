@@ -180,7 +180,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.5.1</version><!-- 3.1 -->
+        <version>3.1</version><!-- 3.1 -->
         <executions>
           <execution>
             <id>default-compile</id>
@@ -207,8 +207,6 @@
         </executions>
       </plugin>
 
-
-<!--
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -218,25 +216,18 @@
           <mainClass></mainClass>
         </configuration>
       </plugin>
--->
 
       <plugin>
         <groupId>com.github.github</groupId>
         <artifactId>site-maven-plugin</artifactId>
         <version>0.9</version>
         <configuration>
-          <!-- jarファイルをディプロイする時のコミットメッセージ -->
           <message>Maven artifacts for ${project.version}</message>
-          <!-- Jekyllという静的ページを生成するツールは無効 -->
           <noJekyll>true</noJekyll>
-          <!-- 1.で指定したパスと同じものを指定 -->
           <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-          <!-- Mavenリポジトリにするリモートのブランチ名 -->
           <branch>refs/heads/mvn-repo</branch>
           <includes><include>**/*</include><!-- */ --></includes>
-          <!-- GitHubリポジトリ名 -->
           <repositoryName>instanceof-commons</repositoryName>
-          <!-- GitHubユーザ名  -->
           <repositoryOwner>syuu256</repositoryOwner>
         </configuration>
         <executions>
@@ -250,7 +241,6 @@
         </executions>
       </plugin>
 
-<!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
@@ -264,7 +254,6 @@
           </execution>
         </executions>
       </plugin>
--->
 
     </plugins>
   </build>
