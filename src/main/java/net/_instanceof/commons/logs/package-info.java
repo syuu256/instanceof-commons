@@ -4,14 +4,14 @@
 /**
  * logback Appender extends.
  * <pre>
- *   <appender name="FILE" class="jp.co.intellilink.cohepoc.logs.PIDNamingRollingFileAppender">
+ *   <appender name="FILE" class="PIDNamingRollingFileAppender">
  *     <append>true</append>
  *     <file>/var/log/app-batch.log</file>
  *     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
  *       <level>TRACE</level>
  *     </filter>
  *     <!-- FixedWindowRollingPolicy -->
- *     <rollingPolicy class="jp.co.intellilink.cohepoc.logs.PIDNamingFixedWindowRollingPolicy">
+ *     <rollingPolicy class="PIDNamingFixedWindowRollingPolicy">
  *       <FileNamePattern>/var/log/app-batch-%i.log</FileNamePattern>
  *       <MinIndex>1</MinIndex>
  *       <MaxIndex>13</MaxIndex>
